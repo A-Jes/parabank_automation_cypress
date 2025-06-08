@@ -1,0 +1,280 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-06-08T01:42:22.439Z",
+    "end": "2025-06-08T01:42:51.923Z",
+    "duration": 29030,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1a8a52c9-7db7-42bf-9de5-35d354190d7b",
+      "title": "",
+      "fullFile": "cypress\\e2e\\Test.cy.ts",
+      "file": "cypress\\e2e\\Test.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5d947b4c-97d5-4054-ab91-9c3d55168a1d",
+          "title": "User Registration",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should register a new user successfully",
+              "fullTitle": "User Registration should register a new user successfully",
+              "timedOut": null,
+              "duration": 7844,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/register.htm');\ncy.fixture('user').then((data) => {\n    const user = data.validUser;\n    const username = 'ajonu' + Date.now();\n    cy.get('#customer\\\\.firstName').type(user.firstName);\n    cy.get('#customer\\\\.lastName').type(user.lastName);\n    cy.get('#customer\\\\.address\\\\.street').type(user.address);\n    cy.get('#customer\\\\.address\\\\.city').type(user.city);\n    cy.get('#customer\\\\.address\\\\.state').type(user.state);\n    cy.get('#customer\\\\.address\\\\.zipCode').type(user.zipCode);\n    cy.get('input[name=\"customer.phoneNumber\"]').type(user.phone);\n    cy.get('input[name=\"customer.ssn\"]').type(user.ssn);\n    cy.get('#customer\\\\.username').type(username);\n    cy.get('#customer\\\\.password').type(user.password);\n    cy.get('#repeatedPassword').type(user.password);\n    cy.get('input[value=\"Register\"]').click();\n    cy.contains('Your account was created successfully. You are now logged in.');\n});",
+              "err": {},
+              "uuid": "6322cb63-6ba0-4011-b0f2-a26d60db7ef1",
+              "parentUUID": "5d947b4c-97d5-4054-ab91-9c3d55168a1d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6322cb63-6ba0-4011-b0f2-a26d60db7ef1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7844,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "c2c54443-67d0-4cb7-8ac0-f749938cf661",
+          "title": "User Login",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in with valid credentials",
+              "fullTitle": "User Login logs in with valid credentials",
+              "timedOut": null,
+              "duration": 3352,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.login(user.username, user.password); // Replace with a real user created in register test\ncy.contains('Accounts Overview').should('be.visible');",
+              "err": {},
+              "uuid": "ad2afa74-5e90-47d5-869b-5bcd0fcf7339",
+              "parentUUID": "c2c54443-67d0-4cb7-8ac0-f749938cf661",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "fails with incorrect credentials",
+              "fullTitle": "User Login fails with incorrect credentials",
+              "timedOut": null,
+              "duration": 3465,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('user').then((data) => {\n    const user = data.invalidUser;\n    cy.login(user.username, user.password);\n    cy.contains('The username and password could not be verified.').should('be.visible');\n});",
+              "err": {},
+              "uuid": "06266104-f72f-468e-9345-02c21e49d156",
+              "parentUUID": "c2c54443-67d0-4cb7-8ac0-f749938cf661",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ad2afa74-5e90-47d5-869b-5bcd0fcf7339",
+            "06266104-f72f-468e-9345-02c21e49d156"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6817,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "725bc26f-7d5d-49ff-b39f-52f4f16dafd0",
+          "title": "Open New Account",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should open a new account",
+              "fullTitle": "Open New Account should open a new account",
+              "timedOut": null,
+              "duration": 4486,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept('GET', '**/customers/**/accounts').as('getAccounts');\ncy.visit('/openaccount.htm');\ncy.wait('@getAccounts');\ncy.get('#type').select('SAVINGS');\ncy.get('#fromAccountId').select(0);\ncy.get('input[value=\"Open New Account\"]').click();\ncy.contains('Account Opened!');",
+              "err": {},
+              "uuid": "48f7bcb7-f91b-4bac-8633-f0da047c6971",
+              "parentUUID": "725bc26f-7d5d-49ff-b39f-52f4f16dafd0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "48f7bcb7-f91b-4bac-8633-f0da047c6971"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4486,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "95692c4d-aec1-4f9e-b3a7-c9cb5dd1808e",
+          "title": "Transfer Funds",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should transfer funds successfully between accounts",
+              "fullTitle": "Transfer Funds should transfer funds successfully between accounts",
+              "timedOut": null,
+              "duration": 4401,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/transfer.htm');\ncy.get('#amount').type('100');\ncy.get('#fromAccountId').select(0);\ncy.get('#toAccountId').select(1);\ncy.get('input[value=\"Transfer\"]').click();\ncy.contains('Transfer Complete!');",
+              "err": {},
+              "uuid": "b07674b5-3704-4626-bbb6-2a0fb212acaf",
+              "parentUUID": "95692c4d-aec1-4f9e-b3a7-c9cb5dd1808e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b07674b5-3704-4626-bbb6-2a0fb212acaf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4401,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "09c1fae1-99d6-4b61-be06-60772f13afcd",
+          "title": "Logout Flow",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should log the user out and restrict access afterward",
+              "fullTitle": "Logout Flow should log the user out and restrict access afterward",
+              "timedOut": null,
+              "duration": 5482,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('user').then((data) => {\n    const user = data.validUser;\n    cy.login(user.username, user.password);\n    cy.contains('Log Out').click();\n    cy.url().should('include', 'index.htm');\n    cy.visit('/transfer.htm', { failOnStatusCode: false });\n    cy.contains('Customer Login');\n});",
+              "err": {},
+              "uuid": "33cbed83-77f1-4e6b-9460-aef771224304",
+              "parentUUID": "09c1fae1-99d6-4b61-be06-60772f13afcd",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "33cbed83-77f1-4e6b-9460-aef771224304"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5482,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

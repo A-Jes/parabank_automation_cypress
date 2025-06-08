@@ -1,0 +1,27 @@
+{
+  "validUser": {
+    "firstName": "Cody",
+    "lastName": "Champlin",
+    "address": "40819 Emard Cliffe",
+    "city": "Mante Vista",
+    "state": "Nevada",
+    "zipCode": "97488",
+    "phone": "5127893782",
+    "ssn": "778973668",
+    "username": "ajonu",
+    "password": "pass"
+  },
+  "invalidUser": {
+    "username": "ajes",
+    "password": "wrongPass"
+  },
+  "transfer": {
+    "fromAccount": "12345",
+    "toAccount": "54321",
+    "amount": "1000"
+  },
+  "openAccount": {
+    "accountType": "SAVINGS",
+    "fundingAccount": "12345"
+  }
+}
