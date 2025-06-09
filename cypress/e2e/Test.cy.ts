@@ -4,4 +4,4 @@ import './transactions/openAccount.cy'
 import './transactions/transferFunds.cy'
 import './auth/logout.cy'
 
-// Triggering GitHub Actions
+// Triggering GitHub Actions again
